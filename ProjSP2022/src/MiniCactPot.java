@@ -5,7 +5,7 @@ import java.util.Random;
 
 import javax.swing.*;
 public class MiniCactPot extends JFrame {
-	// Components
+	//Components
 	private JButton reset;
 	private JPanel rewardsPanel,numberPanel;
 	private JButton[][] numbers; 
@@ -294,8 +294,18 @@ public class MiniCactPot extends JFrame {
 	 *  same spacing and/or format as the demo. 
 	 */
 	public String createRewardsTextArea() {
-		// Return the proper string for the rewards table
-		return "PUT THE REWARDS TABLE HERE";
+		// Returns the proper string for the rewards table put pay out info
+		return "Sum\t MGP\t Sum\t MGP\n"
+				+ "6\t 10000\t 16\t 27\n"
+				+ "7\t 36\t 17\t 180\n"
+				+ "8\t 720\t 18\t 119\n"
+				+ "9\t 360\t 19\t 36\n"
+				+ "10\t 80\t 20\t 306\n"
+				+ "11\t 252\t 21\t 1080\n"
+				+ "12\t 108\t 22\t 144\n"
+				+ "13\t 72\t 23\t 1800\n"
+				+ "14\t 54\t 24\t 3600\n"
+				+ "15\t 180\n";
 				
 	}
 	/*
@@ -312,12 +322,30 @@ public class MiniCactPot extends JFrame {
 		 * with the number one to nine in an random number and without
 		 * repeating any number
 		 */
-		public void resetMatrix(int[][] matrix) {
-			// This is a dummy answer, add the code necessary to fill the array
-			for(int i=0;i<3;i++)
-				for(int j=0;j<3;j++)
-					matrix[i][j]=1;
-			
+		public void resetMatrix(int[][] matrix) 
+		{
+			//populates the parameter matrix with the numbers
+            //one through nine in random order without repeating
+            //a number
+			int num;
+			Random rand = new Random();
+			boolean[] assigned=new boolean[9];
+			for(int i=0;i<assigned.length;i++)
+				assigned[i]=false;
+			//This is a dummy answer, add the code necessary to fill the array
+			 for(int i=0;i<3;i++) 
+			 {
+				for(int j=0;j<3;j++) 
+		{
+						num = rand.nextInt(9)+1;	
+						while(assigned[num-1]==true) 
+						{
+							num=rand.nextInt(9)+1;				
+						}
+			assigned[num-1] = true;
+			matrix[i][j]=num;// add array
+		}
+			 }
 		}
 		/*
 		 *  To obtain the matrix. Do not change
@@ -330,32 +358,64 @@ public class MiniCactPot extends JFrame {
 		 *  the sum of the numbers in that row
 		 */
 		public int getRowSums(int[][] matrix,int row) {
-			// Add code and return the proper number
-			return 0;
+			// returns the sum of each row 
+			int sum = 0;
+			for (int i = 0; i<3; i++)
+			{
+				sum+=matrix[row][i];
+			}
+			
+			return sum;
 		}
 		/*
 		 *  Method 4. For the matrix and an specific column(col) to return
 		 *  the sum of the numbers in that column
 		 */
 		public int getColSums(int[][] matrix,int col) {
-			// Add code and return the proper number
-						return 0;
+			// returns the sum of each column
+			int sum = 0;
+			for (int i = 0; i<3; i++)
+			{
+				sum+=matrix[i][col];
+			}
+			
+			return sum;
+						
 		}
 		/*
 		 *  Method 5. For the matrix return the sum of the direct
 		 *  diagonal
 		 */
 		public int getDirDiagSum(int[][] matrix) {
-			// Add code and return the proper number
-						return 0;
+			// returns the sum of the direct diagonal
+			int sum = 0;
+			int row = 0;
+			int col = 0;
+			for(int i = 0; i < 3; i++)
+			{
+				sum+=matrix[col][row];
+				row++;
+				col++;
+			}
+					
+						return sum;
 		}
 		/*
 		 *  Method 6. For the matrix return the sum of the inverse
 		 *  diagonal
 		 */
 		public int getInvDiagSum(int[][] matrix) {
-			// Add code and return the proper number
-						return 0;
+			// returns the sum of the inverse diagonal
+			int sum = 0;
+			int row = 2;
+			int col = 0;
+			for(int i = 0; i < 3; i++) 
+			{
+				sum+=matrix[col][row];
+				row--;
+				col++;
+			}
+						return sum;
 		}
 		
 	}
